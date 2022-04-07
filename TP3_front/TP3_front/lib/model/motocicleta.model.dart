@@ -3,10 +3,10 @@ part 'motocicleta.model.g.dart';
 
 @JsonSerializable()
 class Motocicleta {
-  String id;
   String modelo;
   double preco;
   String marca;
+  String id;
   Motocicleta(
       {required this.modelo,
       required this.preco,

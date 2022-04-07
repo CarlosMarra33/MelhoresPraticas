@@ -15,7 +15,7 @@ main() {
     await tester.enterText(find.byKey(Key("nomeField")), '11111111');
     await tester.enterText(find.byKey(Key("idadeField")), '11111111');
     await tester.enterText(find.byKey(Key("telefoneField")), 'honda');
-    await tester.tap(find.byKey(Key("telefoneField")));
+    await tester.tap(find.byKey(Key("botao")));
     await tester.pumpAndSettle();
   });
 }

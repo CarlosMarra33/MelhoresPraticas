@@ -20,6 +20,14 @@ public class Motocicleta {
 
     private CalculoStrategy calculoStrategy;
 
+    public Motocicleta(String id, String modelo, double preco, double taxa, double precoFinal) {
+        this.id = id;
+        this.modelo = modelo;
+        this.preco = preco;
+        this.taxa = taxa;
+        this.precoFinal = precoFinal;
+    }
+
     public void setTaxa(){
         MotocicletaSpecification motocicletaSpecification = new MotocicletaSpecification();
         this.taxa = motocicletaSpecification.setarTaxa(this.preco);

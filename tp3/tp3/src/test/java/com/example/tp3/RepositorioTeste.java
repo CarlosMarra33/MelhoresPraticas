@@ -26,34 +26,23 @@ public class RepositorioTeste {
         ResponseMotoDto motocicleta = service.pegarUmPeloId("12");
 
         Assert.assertEquals("teste", motocicleta.getModelo());
-        Assert.assertEquals(15.6, motocicleta.getTaxa());
     }
 
     @Test
     public void buscartodos(){
         List<ResponseMotoDto> motoDtos = service.listarTodos();
 
-        Assert.assertEquals(motoDtos.isEmpty(), motoDtos.isEmpty());
+        Assert.assertEquals(false, motoDtos.isEmpty());
     }
 
     @Test
     public void salvar(){
         MotocicletaDto motoDto = new MotocicletaDto("teste",22.5,"honda","22");
-        ResponseMotoDto responseMotoDto = new ResponseMotoDto();
-        service.cadastrarMotoocicleta(motoDto);
+
+        service.cadastrarMotocicleta(motoDto);
         List<ResponseMotoDto> listaUsuarios = service.listarTodos();
-        responseMotoDto = listaUsuarios.get(2);
 
-        Assert.assertEquals(3, listaUsuarios.size());
-        Assert.assertEquals(responseMotoDto.getId(), motoDto.getId());
-        Assert.assertEquals(responseMotoDto.getModelo(), motoDto.getModelo());
+        Assert.assertEquals(2, listaUsuarios.size());
     }
 
-    @Test
-    public void editar(){
-        MotocicletaDto motoDto = new MotocicletaDto("teste2222222222",22.5,"honda","22");
-        service.editar(motoDto, "1");
-
-        Assert.assertEquals(motoDto.getModelo(), service.pegarUmPeloId("22").getModelo());
-    }
 }

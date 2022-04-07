@@ -1,6 +1,7 @@
 package com.example.tp3.domainLayer.serviceImpl;
 
 import com.example.tp3.domainLayer.Factory.MotocicletaFactory;
+import com.example.tp3.domainLayer.Factory.StrategyFactory;
 import com.example.tp3.domainLayer.model.Motocicleta;
 import com.example.tp3.domainLayer.service.MotocicletaService;
 import com.example.tp3.infraLayer.repositorio.MotocicletaRepositorio;
@@ -19,14 +20,8 @@ public class MotocicletaServiceImpl implements MotocicletaService{
     MotocicletaRepositorio repositorio;
 
     @Override
-    public void cadastrarMotoocicleta(MotocicletaDto motocicletaDto) {
-        Motocicleta motocicleta = new Motocicleta();
-        motocicleta.setId(motocicletaDto.getId());
-        motocicleta.setModelo(motocicletaDto.getModelo());
-        motocicleta.setPreco(motocicletaDto.getPreco());
-        motocicleta.setTaxa();
-        motocicleta.setCalculoStrategy(MotocicletaFactory.selecionarCalculo(motocicletaDto.getMarca()));
-        motocicleta.calcularPreco();
+    public void cadastrarMotocicleta(MotocicletaDto motocicletaDto) {
+        Motocicleta motocicleta = MotocicletaFactory.createMotoFactory(motocicletaDto);
 
         repositorio.save(motocicleta);
     }
@@ -40,6 +35,7 @@ public class MotocicletaServiceImpl implements MotocicletaService{
             ResponseMotoDto rMoto = new ResponseMotoDto(moto.getId(), moto.getModelo(), moto.getTaxa(), moto.getPrecoFinal());
             listaResposta.add(rMoto);
         }
+
         return listaResposta;
     }
 
@@ -47,6 +43,7 @@ public class MotocicletaServiceImpl implements MotocicletaService{
     public ResponseMotoDto pegarUmPeloId(String id) {
         Motocicleta motoInterno = repositorio.pegarPorId(id);
         ResponseMotoDto responseMotoDto = new ResponseMotoDto(motoInterno.getId(), motoInterno.getModelo(), motoInterno.getTaxa(), motoInterno.getPrecoFinal());
+
         return responseMotoDto;
     }
 
@@ -64,7 +61,7 @@ public class MotocicletaServiceImpl implements MotocicletaService{
         motocicletaNew.setModelo(motocicletaDto.getModelo());
         motocicletaNew.setPreco(motocicletaDto.getPreco());
         motocicletaNew.setTaxa();
-        motocicletaNew.setCalculoStrategy(MotocicletaFactory.selecionarCalculo(motocicletaDto.getMarca()));
+        motocicletaNew.setCalculoStrategy(StrategyFactory.selecionarCalculo(motocicletaDto.getMarca()));
         motocicletaNew.calcularPreco();
         repositorio.editar(motocicletaNew, motocicletaOld);
     }

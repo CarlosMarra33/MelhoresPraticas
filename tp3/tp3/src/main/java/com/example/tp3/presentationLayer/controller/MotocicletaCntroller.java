@@ -22,7 +22,7 @@ public class MotocicletaCntroller {
     @PostMapping("/cadastro")
     public ResponseEntity<?> criarUsuario(@RequestBody MotocicletaDto motoDto){
         try {
-            motocicletaService.cadastrarMotoocicleta(motoDto);
+            motocicletaService.cadastrarMotocicleta(motoDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);

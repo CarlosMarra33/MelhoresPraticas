@@ -30,7 +30,7 @@ class _CadastrarPageState extends State<CadastrarPage> {
               controller: modeloController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'nome',
+                hintText: 'Modelo',
               ),
             ),
             SizedBox(
@@ -41,7 +41,7 @@ class _CadastrarPageState extends State<CadastrarPage> {
               controller: precoController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'idade',
+                hintText: 'preço',
               ),
             ),
             SizedBox(
@@ -52,7 +52,7 @@ class _CadastrarPageState extends State<CadastrarPage> {
               controller: marcaController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'telefone',
+                hintText: 'marca',
               ),
             ),
             SizedBox(
@@ -63,12 +63,12 @@ class _CadastrarPageState extends State<CadastrarPage> {
               child: Text('Cadastrar'),
               onPressed: () {
                 Motocicleta motocicleta = Motocicleta(
-                  id: DateTime.now().microsecondsSinceEpoch.toString(),
                   modelo: modeloController.text,
                   preco: double.parse(precoController.text),
                   marca: marcaController.text,
+                  id: DateTime.now().microsecondsSinceEpoch.toString(),
                 );
-                saveUser(motocicleta: motocicleta);
+                saveMoto(motocicleta: motocicleta);
               },
               style: ElevatedButton.styleFrom(
                   primary: Colors.green,
@@ -82,23 +82,16 @@ class _CadastrarPageState extends State<CadastrarPage> {
     );
   }
 
-  void saveUser({required Motocicleta motocicleta}) async {
-    var url = Uri.parse('http://192.168.0.48:8080/cadastro');
+  void saveMoto({required Motocicleta motocicleta}) async {
+    var url = Uri.parse('http://localhost:8080/cadastro');
     var formatedUser = motocicleta.toJson();
     print(json.encode(formatedUser));
     try {
-      // await Dio().post('localhost:8080/cadastro',
-      //     data: json.encode(formatedUser),
-      //     options: Options(headers: {
-      //       "Accept": "application/json",
-      //       "Access-Control_Allow_Origin": "*"
-      // }));
       await http.post(
         url,
         body: json.encode(formatedUser),
         headers: {"Content-Type": "application/json"},
       );
-      // print(await http.read(Uri.parse('https://example.com/foobar.txt%27)));
     } catch (e) {
       print(e.toString());
     }

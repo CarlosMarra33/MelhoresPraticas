@@ -7,7 +7,7 @@ import com.example.tp3.presentationLayer.DTO.ResponseMotoDto;
 import java.util.List;
 
 public interface MotocicletaService {
-    public void cadastrarMotoocicleta(MotocicletaDto motocicletaDto);
+    public void cadastrarMotocicleta(MotocicletaDto motocicletaDto);
     public List<ResponseMotoDto> listarTodos();
     public ResponseMotoDto pegarUmPeloId(String id);
     public void deletar(String id);
